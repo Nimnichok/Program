@@ -23,6 +23,7 @@ def echo_server(host='127.0.0.1', port=65432):
                     print(f"Отримано дані: {data.decode('utf-8')}")
                     conn.sendall(data)
 
+
 if __name__ == "__main__":
     echo_server()
 

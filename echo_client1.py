@@ -20,6 +20,5 @@ def echo_client(host='127.0.0.1', port=65432):
             print(f"Отримано від сервера: {data.decode('utf-8')}")
 
 
-
 if __name__ == "__main__":
     echo_client()
