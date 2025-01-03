@@ -1,0 +1,79 @@
+#Lb2_Встановити python веб фреймворк та запустити веб сервер на порту 8000.
+#from flask import Flask
+
+#app = Flask(__name__)
+
+#@app.route("/")
+#def hello_world():
+#   return "Hello, Flask!"
+
+#if __name__ == "__main__":
+#    app.run(port=8000)
+
+
+
+#Написати просту обробку запиту метода GET сервером. На запит повертати строку “Hello World!”
+#from flask import Flask
+
+#app = Flask(__name__)
+
+#@app.route("/", methods=["GET"])  # Обробка GET-запиту
+#def hello_world():
+#    return "Hello World!"  # Відповідь сервера
+
+#if __name__ == "__main__":
+#    app.run(port=8000)
+
+
+# [Easy-Medium] Написати просту обробку запиту метода GET сервером зі шляхом та параметрами в URL
+
+#from flask import Flask, request
+
+#app = Flask(__name__)
+
+#@app.route("/currency", methods=["GET"])
+#def get_currency_rate():
+    # Отримати параметри запиту
+#    today = request.args.get("today")
+#    key = request.args.get("key")
+
+    # Повертати статичне значення курсу валют
+#    if today and key:
+#        return f"Currency rate for USD is 41.5 (today: {today}, key: {key})", 200
+#    else:
+#        return "Missing 'today' or 'key' parameters in the URL", 400
+
+#if __name__ == "__main__":
+#    app.run(port=8000)
+
+#(http://127.0.0.1:8000/currency?today=2025-01-03&key=value)
+
+
+#[Medium] Обробка заголовків запиту. В залежності від значення параметру заголовку “Content-Type”
+
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+@app.route("/", methods=["GET", "POST"])
+def handle_request():
+    # Отримуємо заголовок Content-Type
+    content_type = request.headers.get("Content-Type")
+
+    if content_type == "application/json":
+        # Повертаємо JSON-документ
+        response = {"message": "This is a JSON response"}
+        return jsonify(response), 200
+    elif content_type == "application/xml":
+        # Повертаємо XML-документ
+        xml_response = "<response><message>This is an XML response</message></response>"
+        return xml_response, 200, {'Content-Type': 'application/xml'}
+    else:
+        # Повертаємо звичайний текст, якщо заголовок Content-Type відсутній або інший
+        return "This is a plain text response", 200
+
+if __name__ == "__main__":
+    app.run(port=8000)
+
+
+
